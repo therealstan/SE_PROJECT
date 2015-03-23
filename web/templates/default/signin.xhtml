@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+<ui:composition>
+<div class="container">
+
+    <h:form id="LoginForm" class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <h:inputText type="email" class="form-control" placeholder="Email address" autofocus="autofocus" id="inputName" value="#{user.name}" required="true"
+                     requiredMessage="Name field must not be empty"/>
+        <!--<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus"/>-->
+        <label for="inputPassword" class="sr-only">Password</label>
+        <h:inputSecret class="form-control" placeholder="Password"  id="inputPassword" value="#{user.password}" required="true"
+                       requiredMessage="Password field must not be empty"/>
+        <!--<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required"/>-->
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me </input>
+            </label>
+        </div>
+        <h:commandButton class="btn btn-lg btn-primary btn-block" action="#{user.login}" type="submit" value="Sign In" ></h:commandButton>
+    </h:form>
+</div>
+        </ui:composition>
+        </html>

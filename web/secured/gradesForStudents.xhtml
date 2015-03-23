@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:o="http://openfaces.org/"
+        >
+
+<ui:composition template="/templates/default/main.xhtml">
+    <ui:define name="content">
+                <h1>Notenübersicht für <h:outputText value="#{user.firstName}"/> <h:outputText value="#{user.lastName}"/> </h1>
+                <o:dataTable var="Leistung" value="#{student}" style="border:1px dotted gray;">
+                    <o:column id ="fachColumn">
+                        <f:facet name="header">
+                            <h:outputText value="Fach" />
+                        </f:facet>
+                        <h:outputText value="#{student.getFach(user)}"/>
+                    </o:column>
+                    <o:column id = "noteColumn">
+                        <f:facet name="header">
+                            <h:outputText value="Note" />
+                        </f:facet>
+                        <h:outputText value="#{student.getGrades(user)}"/>
+                    </o:column>
+                </o:dataTable>
+
+    </ui:define>
+</ui:composition>
+
+</html>
+

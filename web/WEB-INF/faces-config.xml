@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+        version="2.0">
+    <navigation-rule>
+        <description>login user</description>
+        <from-view-id>/login_landing.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{user.login}</from-action>
+            <from-outcome>student</from-outcome>
+            <to-view-id>/secured/gradesForStudents.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{user.login}</from-action>
+            <from-outcome>default</from-outcome>
+            <to-view-id>/secured/default.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{user.login}</from-action>
+            <from-outcome>accessor</from-outcome>
+            <to-view-id>/secured/accessor.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{user.login}</from-action>
+            <from-outcome>tutor</from-outcome>
+            <to-view-id>/secured/tutor.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{user.login}</from-action>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/secured/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-action>#{user.login}</from-action>
+            <from-outcome>invalid</from-outcome>
+            <to-view-id>/error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>register new user</description>
+        <from-view-id>/register.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{user.add}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/secured/success.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{user.add}</from-action>
+            <from-outcome>unsuccess</from-outcome>
+            <to-view-id>/unsuccess.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+    <description>erfolgreich bewertet</description>
+    <from-view-id>/secured/accessor.xhtml</from-view-id>
+    <navigation-case>
+        <from-action>#{accessor.submitGrade(user)}</from-action>
+        <from-outcome>success</from-outcome>
+        <to-view-id>/evaluationSuccess.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+
+    <navigation-rule>
+        <description>template angelegt</description>
+        <from-view-id>/secured/tutor.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{tutor.setValues(user)}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/templateSuccess.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
