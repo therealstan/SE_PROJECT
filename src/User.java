@@ -1,7 +1,9 @@
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -103,8 +105,12 @@ public class User {
         }
     }
 
-    public void logout() {
+    public void logout() throws IOException {
         dbCon.close();
+       /* ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.invalidateSession();
+        ec.redirect(ec.getRequestContextPath() + "/login_landing.xhtml");
+*/
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
         FacesContext

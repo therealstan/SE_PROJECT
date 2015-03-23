@@ -30,10 +30,11 @@
 
 <h:body>
     <ui:insert name="header">
-        <ui:include src="/templates/default/signin.xhtml"></ui:include>
 
     </ui:insert>
-    <ui:insert name="content" />
+    <ui:insert name="login">
+        <ui:include src="/templates/default/signin.xhtml"></ui:include>
+    </ui:insert>
 </h:body>
 </html>
  

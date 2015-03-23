@@ -1,0 +1,10 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="main.xhtml">
+    <ui:define name="content">
+    <h1>Notenübersicht für <ui:insert name="fullName"></ui:insert> </h1>
+    <ui:insert name="tableWithGrades"></ui:insert>
+    </ui:define>
+</ui:composition>
+</html>

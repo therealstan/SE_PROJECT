@@ -6,24 +6,22 @@
       xmlns:o="http://openfaces.org/"
         >
 
-<ui:composition template="/templates/default/main.xhtml">
-    <ui:define name="content">
-                <h1>Notenübersicht für <h:outputText value="#{user.firstName}"/> <h:outputText value="#{user.lastName}"/> </h1>
-                <o:dataTable var="Leistung" value="#{student}" style="border:1px dotted gray;">
-                    <o:column id ="fachColumn">
-                        <f:facet name="header">
-                            <h:outputText value="Fach" />
-                        </f:facet>
-                        <h:outputText value="#{student.getFach(user)}"/>
-                    </o:column>
-                    <o:column id = "noteColumn">
-                        <f:facet name="header">
-                            <h:outputText value="Note" />
-                        </f:facet>
-                        <h:outputText value="#{student.getGrades(user)}"/>
-                    </o:column>
-                </o:dataTable>
-
+<ui:composition template="/templates/default/student.xhtml">
+    <ui:define name="fullName"><h:outputText value="#{user.firstName} "/> <h:outputText value="#{user.lastName}"/></ui:define>
+    <ui:define name="tableWithGrades"><o:dataTable var="Leistung" value="#{student}" style="border:1px dotted gray;">
+        <o:column id ="fachColumn">
+            <f:facet name="header">
+                <h:outputText value="Fach" />
+            </f:facet>
+            <h:outputText value="#{student.getFach(user)}"/>
+        </o:column>
+        <o:column id = "noteColumn">
+            <f:facet name="header">
+                <h:outputText value="Note" />
+            </f:facet>
+            <h:outputText value="#{student.getGrades(user)}"/>
+        </o:column>
+    </o:dataTable>
     </ui:define>
 </ui:composition>
 
