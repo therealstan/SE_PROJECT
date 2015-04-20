@@ -64,6 +64,35 @@ public class DatabaseCon {
         }
     }
 
+    public List<String> getUniversityNameList(long userID) {
+        List<String> list = new ArrayList<String>();
+            PreparedStatement ps = null;
+            try {
+                if (ds != null) {
+                    if (con != null) {
+                        String sql = "SELECT university.name_university FROM university INNER JOIN userUniversity ON university.id_university=userUniversity.userID AND userUniversity.UserID=(?)";
+                        ps = con.prepareStatement(sql);
+                        ps.setLong(1, userID);
+                        ResultSet rs = ps.executeQuery();
+                        while (rs.next()) {
+                            list.add(rs.getString("name_university"));
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (ps != null) {
+                        ps.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+               }
+            }
+        return list;
+    }
+
     public List<Double> getGrade(long studentID) {
         List<Double> list = new ArrayList<Double>();
         if (getUserRole(studentID) == userRole.STUDENT) {
