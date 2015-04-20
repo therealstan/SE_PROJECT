@@ -105,12 +105,10 @@ public class User {
         }
     }
 
-    public void logout() throws IOException {
+    public String logout() throws IOException {
         dbCon.close();
-       /* ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.invalidateSession();
-        ec.redirect(ec.getRequestContextPath() + "/login_landing.xhtml");
-*/
+
+
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
         FacesContext
@@ -118,8 +116,13 @@ public class User {
                 .getApplication()
                 .getNavigationHandler()
                 .handleNavigation(FacesContext.getCurrentInstance(), null,
-                        "/login_landing.xhtml");
+                        "login_landing.xhtml?faces-redirect=true");
+    return "success";
+
     }
+
+
+
 
     public DatabaseCon.userRole getRole() {
         return role;

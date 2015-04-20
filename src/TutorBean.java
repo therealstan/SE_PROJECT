@@ -28,6 +28,16 @@ public class TutorBean {
     private DatabaseCon dbCon;
     private List<S2G> s2gList;
     private String selectedS2G;
+    private boolean editmode = false;
+
+    public void edit() {
+
+        this.editmode = true;
+    }
+
+    public void save() {
+        this.editmode = false;
+    }
 
     public TutorBean() {
         this.s2gList = new ArrayList<S2G>();
@@ -218,5 +228,8 @@ public class TutorBean {
             Error Page
              */
     }
+
+
+
 }
 

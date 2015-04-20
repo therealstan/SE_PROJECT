@@ -1,14 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:o="http://openfaces.org/"
-        >
 
+        >
+<h:body>
 <ui:composition template="/templates/default/student.xhtml">
     <ui:define name="fullName"><h:outputText value="#{user.firstName} "/> <h:outputText value="#{user.lastName}"/></ui:define>
-    <ui:define name="tableWithGrades"><o:dataTable var="Leistung" value="#{student}" style="border:1px dotted gray;">
+    <ui:define name="tableWithGrades">
+        <o:dataTable var="Leistung" value="#{student}" style="border:1px dotted gray;">
         <o:column id ="fachColumn">
             <f:facet name="header">
                 <h:outputText value="Fach" />
@@ -22,8 +25,25 @@
             <h:outputText value="#{student.getGrades(user)}"/>
         </o:column>
     </o:dataTable>
+
     </ui:define>
+
+
+
+        <ui:define name="courses">
+
+            <ul class="nav nav-sidebar">
+                <li><a href="#"> hoho</a></li>
+                <ui:repeat value="#{student.getFach(user)}" var="fach">
+                    <li>
+                        <a href="#">#{fach}</a>
+                    </li>
+                </ui:repeat></ul>
+
+        </ui:define>
+
 </ui:composition>
 
+</h:body>
 </html>
 
