@@ -64,6 +64,31 @@ public class DatabaseCon {
         }
     }
 
+    /*
+    returns the number of pending courses
+     */
+    public double getPendingCourses(long userID)
+    {
+        double pendingCnt = 0;
+        PreparedStatement ps;
+        try {
+            if (con != null) {
+                String sql = "SELECT count(course.finished) as test  FROM course INNER JOIN staff_course_supervision ON course.courseID=staff_course_supervision.courseID AND staff_course_supervision.userID = (?) AND course.finished = 0";
+                ps = con.prepareStatement(sql);
+                ps.setLong(1, userID);
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    pendingCnt = rs.getInt(1);
+                }
+            }
+        } catch (SQLException sqle) {
+            System.out.println("Kann mich nicht verbinden");
+            sqle.printStackTrace();
+        }
+        return pendingCnt;
+    }
+
     public List<String> getUniversityNameList(long userID) {
         List<String> list = new ArrayList<String>();
             PreparedStatement ps = null;
