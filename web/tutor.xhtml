@@ -78,15 +78,17 @@
     <ui:composition template="templates/default/main.xhtml">
         <ui:define name="courses">
             <ul class="nav nav-sidebar">
-                <li>
-                    <a href="#">DHBW Stuttgart</a>
-                </li>
-                <li>
-                    <a href="#">DHBW Mannheim</a>
-                </li>
-                <li>
-                    <a href="#">DHBW Lörrach</a>
-                </li>
+                <ui:repeat value="#{user.dbCon.getUniversityNameList(user.userID)}" var="test">
+                    <li><h:link value="#{test}" />
+                        <ul class="nav nav-sidebar">
+                            <ui:repeat value="#{user.dbCon.getCourseNameList(user.userID, test)}" var="courseList">
+                                <li><h:link value="#{courseList}" /></li>
+                            </ui:repeat>
+
+                        </ul>
+                    </li>
+                </ui:repeat>
+
             </ul>
         </ui:define>
 

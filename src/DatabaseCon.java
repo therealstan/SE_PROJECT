@@ -95,12 +95,12 @@ public class DatabaseCon {
             try {
                 if (ds != null) {
                     if (con != null) {
-                        String sql = "SELECT university.name_university FROM university INNER JOIN userUniversity ON university.id_university=userUniversity.universityID AND userUniversity.UserID=(?)";
+                        String sql = "SELECT university.name FROM university INNER JOIN userUniversity ON university.id=userUniversity.universityID AND userUniversity.UserID=(?)";
                         ps = con.prepareStatement(sql);
                         ps.setLong(1, userID);
                         ResultSet rs = ps.executeQuery();
                         while (rs.next()) {
-                            list.add(rs.getString("name_university"));
+                            list.add(rs.getString("name"));
                         }
                     }
                 }
@@ -115,6 +115,38 @@ public class DatabaseCon {
                     e.printStackTrace();
                }
             }
+        return list;
+    }
+
+    public List<String> getCourseNameList(long userID, String university) {
+        List<String> list = new ArrayList<String>();
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "SELECT course.* FROM course\n" +
+                            "\t INNER JOIN university ON university.id=course.universityID AND university.name = (?)\n" +
+                            "\t INNER JOIN staff_course_supervision ON staff_course_supervision.courseID=course.courseID AND staff_course_supervision.userID = (?)";
+                    ps = con.prepareStatement(sql);
+                    ps.setString(1, university);
+                    ps.setLong(2, userID);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        list.add(rs.getString("name"));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return list;
     }
 
