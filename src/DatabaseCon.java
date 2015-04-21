@@ -95,7 +95,7 @@ public class DatabaseCon {
             try {
                 if (ds != null) {
                     if (con != null) {
-                        String sql = "SELECT university.name_university FROM university INNER JOIN userUniversity ON university.id_university=userUniversity.userID AND userUniversity.UserID=(?)";
+                        String sql = "SELECT university.name_university FROM university INNER JOIN userUniversity ON university.id_university=userUniversity.universityID AND userUniversity.UserID=(?)";
                         ps = con.prepareStatement(sql);
                         ps.setLong(1, userID);
                         ResultSet rs = ps.executeQuery();
