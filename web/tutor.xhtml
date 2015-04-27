@@ -11,85 +11,90 @@
 
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     <title>Login Page</title>
-    <style type="text/css">
-        /* Small screens (default) */
-        html { font-size: 100%; }
+<style type="text/css">
+        /*/!* Small screens (default) *!/*/
+        /*html { font-size: 100%; }*/
 
-        /* Medium screens (640px) */
-        @media (min-width: 40rem) {
-            html { font-size: 112%; }
-        }
+        /*/!* Medium screens (640px) *!/*/
+        /*@media (min-width: 40rem) {*/
+            /*html { font-size: 112%; }*/
+        /*}*/
 
-        /* Large screens (1024px) */
-        @media (min-width: 64rem) {
-            html { font-size: 120%; }
-        }
+        /*/!* Large screens (1024px) *!/*/
+        /*@media (min-width: 64rem) {*/
+            /*html { font-size: 120%; }*/
+        /*}*/
 
-        *, *:before, *:after {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-        }
+        /**, *:before, *:after {*/
+            /*-moz-box-sizing: border-box;*/
+            /*-webkit-box-sizing: border-box;*/
+            /*box-sizing: border-box;*/
+        /*}*/
 
-        .container {
-            margin: 0 auto;
-            max-width: 48rem;
-            width: 90%;
-        }
+        /*.container {*/
+            /*margin: 0 auto;*/
+            /*max-width: 48rem;*/
+            /*width: 90%;*/
+        /*}*/
 
-        @media (min-width: 40rem) {
-            .column {
-                float: left;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
+        /*@media (min-width: 40rem) {*/
+            /*.column {*/
+                /*float: left;*/
+                /*padding-left: 1rem;*/
+                /*padding-right: 1rem;*/
+            /*}*/
 
-            .column.full { width: 100%; }
-            .column.two-thirds { width: 66.7%; }
-            .column.half { width: 50%; }
-            .column.third { width: 33.3%; }
-            .column.fourth { width: 25%; }
-            .column.fourth.middle{vertical-align: middle;}
+            /*.column.full { width: 100%; }*/
+            /*.column.two-thirds { width: 66.7%; }*/
+            /*.column.half { width: 50%; }*/
+            /*.column.third { width: 33.3%; }*/
+            /*.column.fourth { width: 25%; }*/
+            /*.column.fourth.middle{vertical-align: middle;}*/
 
-            .column.flow-opposite { float: right; }
-        }
+            /*.column.flow-opposite { float: right; }*/
+        /*}*/
 
-        .clearfix:before,
-        .clearfix:after {
-            content: " ";
-            display: table;
-        }
+        /*.clearfix:before,*/
+        /*.clearfix:after {*/
+            /*content: " ";*/
+            /*display: table;*/
+        /*}*/
 
-        .clearfix:after {
-            clear: both;
-        }
+        /*.clearfix:after {*/
+            /*clear: both;*/
+        /*}*/
 
-        .clearfix {
-            *zoom: 1;
-        }
+        /*.clearfix {*/
+            /**zoom: 1;*/
+        /*}*/
 
 
 
     </style>
+
 </h:head>
 
 <h:body>
+
     <ui:composition template="templates/default/main.xhtml">
         <ui:define name="courses">
+            <div id="cssmenu">
             <ul class="nav nav-sidebar">
-                <ui:repeat value="#{user.dbCon.getUniversityList(user.userID)}" var="test">
-                    <li><h:link value="#{test.name}" />
-                        <ul class="nav nav-sidebar">
+                <ui:repeat value="#{user.dbCon.getUniversityList(user.userID)}" var="test" varStatus="status">
+                    <li class="has-sub #{status.last?'first':'active'}" ><h:link value="#{test.name}" />
+                        <ul >
                             <ui:repeat value="#{user.dbCon.getCourseList(user.userID, test.id, 0)}" var="courseList">
-                                <li><h:link value="#{courseList.name}" /></li>
+                                <li><h:link value="#{courseList.name}" outcome="testPage1.xhtml" /></li>
                             </ui:repeat>
 
                         </ul>
-                    </li>
-                </ui:repeat>
+                </li>
 
+            </ui:repeat>
             </ul>
+            </div>
         </ui:define>
 
         <ui:define name="content">
