@@ -1,7 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://openfaces.org/">
+
 <ui:composition template="main.xhtml">
     <ui:define name="content">
         <h1>Notenübersicht für <ui:insert name="fullName"></ui:insert> </h1>
@@ -14,6 +16,10 @@
             <h2><h:outputText id="output" value="#{helloBean.sayWelcome}" /></h2>
         </h:form>
         <ui:insert name="tableWithGrades"></ui:insert>
+
+
+
+
     </ui:define>
 </ui:composition>
 </html>
