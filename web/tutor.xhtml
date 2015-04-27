@@ -79,10 +79,10 @@
         <ui:define name="courses">
             <ul class="nav nav-sidebar">
                 <ui:repeat value="#{user.dbCon.getUniversityNameList(user.userID)}" var="test">
-                    <li><h:link value="#{test}" />
+                    <li><h:link value="#{test.toString()}" />
                         <ul class="nav nav-sidebar">
-                            <ui:repeat value="#{user.dbCon.getCourseNameList(user.userID, test)}" var="courseList">
-                                <li><h:link value="#{courseList}" /></li>
+                            <ui:repeat value="#{user.dbCon.getCourseNameList(user.userID, test.id)}" var="courseList">
+                                <li><h:link value="#{courseList.toString()}" /></li>
                             </ui:repeat>
 
                         </ul>

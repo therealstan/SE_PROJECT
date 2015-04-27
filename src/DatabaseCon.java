@@ -89,18 +89,18 @@ public class DatabaseCon {
         return pendingCnt;
     }
 
-    public List<String> getUniversityNameList(long userID) {
-        List<String> list = new ArrayList<String>();
+    public List<DatabaseElement> getUniversityList(long userID) {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
             PreparedStatement ps = null;
             try {
                 if (ds != null) {
                     if (con != null) {
-                        String sql = "SELECT university.name FROM university INNER JOIN userUniversity ON university.id=userUniversity.universityID AND userUniversity.UserID=(?)";
+                        String sql = "SELECT university.id, university.name FROM university INNER JOIN userUniversity ON university.id=userUniversity.universityID AND userUniversity.UserID=(?)";
                         ps = con.prepareStatement(sql);
                         ps.setLong(1, userID);
                         ResultSet rs = ps.executeQuery();
                         while (rs.next()) {
-                            list.add(rs.getString("name"));
+                            list.add(new DatabaseElement(rs.getLong("id"), rs.getString("name")));
                         }
                     }
                 }
@@ -118,21 +118,21 @@ public class DatabaseCon {
         return list;
     }
 
-    public List<String> getCourseNameList(long userID, String university) {
-        List<String> list = new ArrayList<String>();
+    public List<DatabaseElement> getCourseNameList(long userID, long universityID) {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
         PreparedStatement ps = null;
         try {
             if (ds != null) {
                 if (con != null) {
                     String sql = "SELECT course.* FROM course\n" +
-                            "\t INNER JOIN university ON university.id=course.universityID AND university.name = (?)\n" +
+                            "\t INNER JOIN university ON university.id=course.universityID AND university.id = (?)\n" +
                             "\t INNER JOIN staff_course_supervision ON staff_course_supervision.courseID=course.courseID AND staff_course_supervision.userID = (?)";
                     ps = con.prepareStatement(sql);
-                    ps.setString(1, university);
+                    ps.setLong(1, universityID);
                     ps.setLong(2, userID);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
-                        list.add(rs.getString("name"));
+                        list.add(new DatabaseElement(rs.getLong("id"),rs.getString("name")));
                     }
                 }
             }
