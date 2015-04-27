@@ -67,16 +67,16 @@ public class DatabaseCon {
     /*
     returns the number of pending courses
      */
-    public double getPendingCourses(long userID)
+    public double getPendingTemplates(long courseID, int pendingStat)
     {
         double pendingCnt = 0;
         PreparedStatement ps;
         try {
             if (con != null) {
-                String sql = "SELECT count(course.finished) as test  FROM course INNER JOIN staff_course_supervision ON course.courseID=staff_course_supervision.courseID AND staff_course_supervision.userID = (?) AND course.finished = 0";
+                String sql = "SELECT count(template.finished) as test  FROM template INNER JOIN course ON template.id=course.templateID AND course.courseID = (?) AND template.finished = (?)";
                 ps = con.prepareStatement(sql);
-                ps.setLong(1, userID);
-
+                ps.setLong(1, courseID);
+                ps.setInt(2, pendingStat);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     pendingCnt = rs.getInt(1);
@@ -162,6 +162,36 @@ public class DatabaseCon {
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         list.add(new DatabaseElement(rs.getLong("courseID"),rs.getString("name")));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    public List<DatabaseElement> getTemplateList(long courseID, int pendingStat) {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "SELECT template.* FROM template INNER JOIN course ON template.id = course.templateID AND course.courseID = (?) AND template.finished = (?)";
+                    ps = con.prepareStatement(sql);
+                    ps.setLong(1, courseID);
+                    ps.setInt(2, pendingStat);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        list.add(new DatabaseElement(rs.getLong("id"), rs.getString("name")));
                     }
                 }
             }
