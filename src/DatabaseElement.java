@@ -4,6 +4,11 @@
 public class DatabaseElement {
 
     long id;
+    public long getId()
+    {
+     return id;
+    }
+
     String name;
 
     public DatabaseElement (long id, String name)
@@ -12,7 +17,7 @@ public class DatabaseElement {
         this.name = name;
     }
 
-    public String toString()
+    public String getName()
     {
         return this.name;
     }

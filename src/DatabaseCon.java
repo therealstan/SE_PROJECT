@@ -88,37 +88,66 @@ public class DatabaseCon {
         }
         return pendingCnt;
     }
-
     public List<DatabaseElement> getUniversityList(long userID) {
         List<DatabaseElement> list = new ArrayList<DatabaseElement>();
-            PreparedStatement ps = null;
-            try {
-                if (ds != null) {
-                    if (con != null) {
-                        String sql = "SELECT university.id, university.name FROM university INNER JOIN userUniversity ON university.id=userUniversity.universityID AND userUniversity.UserID=(?)";
-                        ps = con.prepareStatement(sql);
-                        ps.setLong(1, userID);
-                        ResultSet rs = ps.executeQuery();
-                        while (rs.next()) {
-                            list.add(new DatabaseElement(rs.getLong("id"), rs.getString("name")));
-                        }
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "SELECT university.id, university.name FROM university INNER JOIN userUniversity ON university.id=userUniversity.universityID AND userUniversity.UserID=(?)";
+                    ps = con.prepareStatement(sql);
+                    ps.setLong(1, userID);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        list.add(new DatabaseElement(rs.getLong("id"), rs.getString("name")));
                     }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (ps != null) {
-                        ps.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-               }
             }
+        }
         return list;
     }
 
-    public List<DatabaseElement> getCourseNameList(long userID, long universityID) {
+    public List<DatabaseElement> getAssigendStudentList(long courseID) {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "SELECT user.id, user.name FROM user INNER JOIN courseStudent ON user.id=courseStudent.studentID AND courseStudent.courseID = (?)";
+                    ps = con.prepareStatement(sql);
+                    ps.setLong(1, courseID);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        list.add(new DatabaseElement(rs.getLong("id"), rs.getString("name")));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+
+    public List<DatabaseElement> getCourseList(long userID, long universityID, int pendingStat) {
         List<DatabaseElement> list = new ArrayList<DatabaseElement>();
         PreparedStatement ps = null;
         try {
@@ -126,13 +155,13 @@ public class DatabaseCon {
                 if (con != null) {
                     String sql = "SELECT course.* FROM course\n" +
                             "\t INNER JOIN university ON university.id=course.universityID AND university.id = (?)\n" +
-                            "\t INNER JOIN staff_course_supervision ON staff_course_supervision.courseID=course.courseID AND staff_course_supervision.userID = (?)";
+                            "\t INNER JOIN staff_course_supervision ON staff_course_supervision.courseID=course.courseID AND staff_course_supervision.userID = (?) AND course.finished = 0";
                     ps = con.prepareStatement(sql);
                     ps.setLong(1, universityID);
                     ps.setLong(2, userID);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
-                        list.add(new DatabaseElement(rs.getLong("id"),rs.getString("name")));
+                        list.add(new DatabaseElement(rs.getLong("courseID"),rs.getString("name")));
                     }
                 }
             }
