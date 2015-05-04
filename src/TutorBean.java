@@ -35,7 +35,15 @@ public class TutorBean implements Serializable {
     private boolean editmode = false;
 
 
-/// NEW VERSION
+    public void setImpactName(String impactName) {
+        this.impactName = impactName;
+    }
+
+    public void setImpact(double impact) {
+        this.impact = impact;
+    }
+
+    /// NEW VERSION
     String impactName;
     double impact;
 
