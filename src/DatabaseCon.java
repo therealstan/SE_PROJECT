@@ -285,44 +285,59 @@ public class DatabaseCon {
         return list;
     }
 
-    public List<String> getFach(long studentID) {
-        List<String> list = new ArrayList<String>();
-        if (getUserRole(studentID) == userRole.STUDENT) {
-            PreparedStatement ps = null;
-            try {
-                if (ds != null) {
-                    if (con != null) {
-                        String sql = "SELECT courseID FROM grade WHERE userID = (?)";
-                        ps = con.prepareStatement(sql);
-                        ps.setLong(1, studentID);
-                        ResultSet rs = ps.executeQuery();
-
-                        List<Integer> courseIDList = new ArrayList<Integer>();
-                        while (rs.next()) {
-                            courseIDList.add(rs.getInt("courseID"));
-                        }
-
-                        for (Integer integer : courseIDList) {
-                            sql = "SELECT name FROM course WHERE courseID = (?)";
-                            ps = con.prepareStatement(sql);
-                            ps.setInt(1, integer);
-                            rs = ps.executeQuery();
-                            while (rs.next()) {
-                                list.add(rs.getString("name"));
-                            }
-                        }
+    public List<DatabaseElement> getSemesterList() {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "SELECT * FROM semester";
+                    ps = con.prepareStatement(sql);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        list.add(new DatabaseElement(rs.getLong("id"),rs.getString("name")));
                     }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (ps != null) {
-                        ps.close();
+            }
+        }
+        return list;
+    }
+
+    public List<DatabaseElement> getFach(long studentID, long semesterID) {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "SELECT course.* FROM course INNER JOIN courseStudent ON courseStudent.courseID= course.courseID AND courseStudent.studentID = (?) INNER JOIN semesterCourse ON semesterCourse.courseID = course.courseID AND semesterCourse.semesterID = (?)";
+                    ps = con.prepareStatement(sql);
+                    ps.setLong(1, studentID);
+                    ps.setLong(2, semesterID);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        list.add(new DatabaseElement(rs.getLong("courseID"),rs.getString("name")));
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return list;
