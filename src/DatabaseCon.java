@@ -162,7 +162,17 @@ public class DatabaseCon {
                         ps.setLong(1, element.id);
                         ResultSet rs = ps.executeQuery();
                         while (rs.next()) {
-                             list.add(new DatabaseElement(rs.getLong("id"),rs.getString("name")));
+                            boolean exists = false;
+                            for(DatabaseElement listElement: list)
+                            {
+                                if(rs.getLong("id") == listElement.id)
+                                {
+                                    exists = true;
+                                }
+                            }
+                            if(exists == false){
+                                list.add(new DatabaseElement(rs.getLong("id"),rs.getString("name")));
+                            }
                         }
                     }
                 }
