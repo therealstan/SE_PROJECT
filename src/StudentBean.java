@@ -11,17 +11,6 @@ import java.util.List;
 @SessionScoped
 public class StudentBean {
 
-    public List<String> getFach(User user) {
-        DatabaseCon dbCon = user.getDbCon();
-
-        List<String> listFach = new ArrayList<String>();
-
-        if (user.getRole() == DatabaseCon.userRole.STUDENT) {
-            listFach = dbCon.getFach(user.getUserID());
-        }
-
-        return listFach;
-    }
 
     public List<Double> getGrades(User user) {
 
