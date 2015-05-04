@@ -147,6 +147,41 @@ public class DatabaseCon {
     }
 
 
+    public List<DatabaseElement> getFachrichtungList(long userID, long universityID) {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    List<DatabaseElement> courseList = getCourseList(userID, universityID,0);
+
+                    for(DatabaseElement element: courseList)
+                    {
+                        String sql = "SELECT fachrichtung.* FROM fachrichtung INNER JOIN fachrichtungCourse ON fachrichtungCourse.idFachrichtung=fachrichtung.id INNER JOIN course ON fachrichtungCourse.idCourse = course.courseID AND course.courseID = (?)";
+                        ps = con.prepareStatement(sql);
+                        ps.setLong(1, element.id);
+                        ResultSet rs = ps.executeQuery();
+                        while (rs.next()) {
+                             list.add(new DatabaseElement(rs.getLong("id"),rs.getString("name")));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+
     public List<DatabaseElement> getCourseList(long userID, long universityID, int pendingStat) {
         List<DatabaseElement> list = new ArrayList<DatabaseElement>();
         PreparedStatement ps = null;
