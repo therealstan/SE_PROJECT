@@ -10,15 +10,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.io.Serializable;
 
 @ManagedBean(name = "tutor")
 @SessionScoped
-public class TutorBean {
+
+public class TutorBean implements Serializable {
 
     String templateName;
     String h2Name;
     double h2Threshold;
+
     String impact1Name;
     String impact2Name;
     String impact3Name;
@@ -29,6 +33,83 @@ public class TutorBean {
     private List<S2G> s2gList;
     private String selectedS2G;
     private boolean editmode = false;
+
+
+/// NEW VERSION
+    String impactName;
+    double impact;
+
+    private static final ArrayList<Impact> impactList =
+            new ArrayList<>(Arrays.asList(
+                    new Impact("Item1", 0.54),
+                    new Impact("Item2", 0.57)
+            ));
+
+    public ArrayList<Impact> getImpactList() {
+
+        return impactList;
+
+    }
+
+    public String addItem() {
+
+        Impact impact = new Impact(this.impactName, this.impact);
+
+       impactList.add(impact);
+        return null;
+    }
+
+    public String deleteItem(Impact impact) {
+
+        impactList.remove(impact);
+        return null;
+    }
+
+      public String getImpactName() {
+        return impactName;
+    }
+
+    public double getImpact() {
+        return impact;
+    }
+
+    public static class Impact{
+
+        public String getImpactName() {
+            return impactName;
+        }
+
+        public void setImpactName(String impactName) {
+            this.impactName = impactName;
+        }
+
+        public double getImpact() {
+            return impact;
+        }
+
+        public void setImpact(double impact) {
+            this.impact = impact;
+        }
+
+        String impactName;
+        double impact;
+
+
+        public Impact(String impactName, double impact) {
+            this.impactName = impactName;
+            this.impact = impact;
+        }
+
+
+
+
+
+    }
+
+/// END OF NEW VERSION
+
+
+
 
     public void edit() {
 

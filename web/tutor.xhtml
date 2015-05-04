@@ -80,21 +80,7 @@
 
     <ui:composition template="templates/default/main.xhtml">
         <ui:define name="courses">
-            <div id="cssmenu">
-            <ul class="nav nav-sidebar">
-                <ui:repeat value="#{user.dbCon.getUniversityList(user.userID)}" var="test" varStatus="status">
-                    <li class="has-sub #{status.last?'first':'active'}" ><h:link value="#{test.name}" />
-                        <ul >
-                            <ui:repeat value="#{user.dbCon.getCourseList(user.userID, test.id, 0)}" var="courseList">
-                                <li><h:link value="#{courseList.name}" outcome="testPage1.xhtml" /></li>
-                            </ui:repeat>
 
-                        </ul>
-                </li>
-
-            </ui:repeat>
-            </ul>
-            </div>
         </ui:define>
 
         <ui:define name="content">
@@ -113,28 +99,28 @@
 
 
                 <h2>R2S - Impacts festlegen</h2>
-                <o:inputText id="impact" size="20" value="#{order.impactName}" promptText="Name" focusedStyle="border: 2px solid blue"/>
-                <o:inputText id="impValue" size="20" value="#{order.impactValue}" promptText="Valaue" focusedStyle="border: 2px solid blue"/>
-                <o:commandLink value="Add Impact" execute="impact impValue" action="#{order.addAction}" render="impactTable" />
+                <o:inputText id="impact" size="20" value="#{tutor.impactName}" promptText="Name" focusedStyle="border: 2px solid blue"/>
+                <o:inputText id="impValue" size="20" value="#{tutor.impact}" promptText="Valaue" focusedStyle="border: 2px solid blue"/>
+                <o:commandLink value="Add Impact" execute="impact impValue" action="#{tutor.addItem}" render="impactTable" />
                 <br/>
-                <o:dataTable id="impactTable" value="#{order.orderList}" var="o">
+                <o:dataTable id="impactTable" value="#{tutor.impactList}" var="i">
                    <o:column>
                        <f:facet name="header">
                            <h:outputText value="Impact Name"/>
                        </f:facet>
-                       #{o.impactName}}
+                       #{i.impactName}}
                    </o:column>
                    <o:column>
                        <f:facet name="header">
                            <h:outputText value="Value"/>
                        </f:facet>
-                       #{o.impactValue}
+                       #{i.impact}
                    </o:column>
                    <o:column>
                        <f:facet name="header">Action</f:facet>
 
                        <o:commandLink value="Delete"
-                                      action="#{order.deleteAction(o)}">
+                                      action="#{tutor.deleteItem(i)}">
 
                        </o:commandLink>
                    </o:column>

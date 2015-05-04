@@ -9,7 +9,8 @@
         >
 <h:body>
 <ui:composition template="/templates/default/student.xhtml">
-    <ui:define name="fullName"><h:outputText value="#{user.firstName} "/> <h:outputText value="#{user.lastName}"/></ui:define>
+
+    <ui:define name="fullName"> <h:outputText value="#{user.firstName} "/> <h:outputText value="#{user.lastName}"/></ui:define>
     <ui:define name="tableWithGrades">
         <o:dataTable var="Leistung" value="#{student}" style="border:1px dotted gray;">
         <o:column id ="fachColumn">
@@ -29,18 +30,6 @@
     </ui:define>
 
 
-
-        <ui:define name="courses">
-
-            <ul class="nav nav-sidebar">
-                <li><a href="#"> hoho</a></li>
-                <ui:repeat value="#{student.getFach(user)}" var="fach">
-                    <li>
-                        <a href="#">#{fach}</a>
-                    </li>
-                </ui:repeat></ul>
-
-        </ui:define>
 
 </ui:composition>
 

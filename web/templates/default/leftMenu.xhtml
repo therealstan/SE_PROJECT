@@ -1,12 +1,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition>
 
-        <ui:insert name="courses">
+    <div id="cssmenu">
+        <ul>
+            <ui:fragment rendered="#{user.role eq 'TUTOR'}">
+                <ui:repeat value="#{user.dbCon.getUniversityList(user.userID)}" var="test" varStatus="status">
+                    <li class="has-sub #{status.last?'first':'active'}" ><h:link value="#{test.name}" />
+                        <ul>
+                        <ui:repeat value="#{user.dbCon.getFachrichtungList(user.userID, test.id)}" var="fachrichtung" varStatus="status2">
+                            <li class="has-sub #{status2.last?'first':'active'} "> <h:link value="#{fachrichtung.name}" />
+                                <ul >
+                                    <ui:repeat value="#{user.dbCon.getCourseList(user.userID, test.id, 0)}" var="courseList">
+                                        <li>
+                                            <h:link value="#{courseList.name}" outcome="templateList_forCourse.xhtml" >
+                                                <f:param name="courseID" value="#{courseList.id}"/>
+                                            </h:link>
+                                        </li>
 
+                                    </ui:repeat>
 
-        </ui:insert>
+                                </ul>
+                            </li>
+                        </ui:repeat>
+                        </ul>
+
+                    </li>
+
+                </ui:repeat>
+            </ui:fragment>
+            <ui:fragment rendered="#{user.role eq 'STUDENT'}">
+                    <ui:repeat value="#{student.getFach(user)}" var="fach">
+                        <li>
+                            <h:link value="#{fach}" outcome="#"/>
+                        </li>
+                    </ui:repeat>
+
+            </ui:fragment>
+        </ul>
+    </div>
 
 </ui:composition>
 </html>

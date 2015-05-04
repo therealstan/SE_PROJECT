@@ -79,28 +79,15 @@
 <h:body>
 
     <ui:composition template="templates/default/main.xhtml">
-        <ui:define name="courses">
-            <div id="cssmenu">
-                <ul class="nav nav-sidebar">
-                    <ui:repeat value="#{user.dbCon.getUniversityList(user.userID)}" var="test" varStatus="status">
-                        <li class="has-sub #{status.last?'first':'active'}" ><h:link value="#{test.name}" />
-                            <ul >
-                                <ui:repeat value="#{user.dbCon.getCourseList(user.userID, test.id, 0)}" var="courseList">
-                                    <li><h:link value="#{courseList.name}"  /></li>
-                                </ui:repeat>
 
-                            </ul>
-                        </li>
-
-                    </ui:repeat>
-                </ul>
-            </div>
-        </ui:define>
 
         <ui:define name="content">
-                <ui:repeat value="" var="assignment">
-                    <h:outputText value=""/>
-                </ui:repeat>
+            <ui:repeat value="#{user.dbCon.getTemplateList(course.courseID,0)}" var="tpl">
+              <h:link value="#{tpl.name}"/>
+            </ui:repeat>
+              <h:outputFormat value="{0}">
+                  <f:param value="#{course.courseID}"/>
+              </h:outputFormat>
         </ui:define>
     </ui:composition>
 
