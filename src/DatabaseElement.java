@@ -3,13 +3,13 @@
  */
 public class DatabaseElement {
 
+
     long id;
-    public long getId()
-    {
-     return id;
-    }
+
 
     String name;
+    String firstname;
+    String lastname;
 
     public DatabaseElement (long id, String name)
     {
@@ -17,8 +17,28 @@ public class DatabaseElement {
         this.name = name;
     }
 
+    public DatabaseElement(long id, String firstname,String lastname)
+    {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
+    public long getId()
+    {
+        return id;
+    }
+
     public String getName()
     {
         return this.name;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 }

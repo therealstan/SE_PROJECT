@@ -123,12 +123,12 @@ public class DatabaseCon {
         try {
             if (ds != null) {
                 if (con != null) {
-                    String sql = "SELECT user.id, user.name FROM user INNER JOIN courseStudent ON user.id=courseStudent.studentID AND courseStudent.courseID = (?)";
+                    String sql = "SELECT user.id, user.firstname, user.lastname FROM user INNER JOIN courseStudent ON user.id=courseStudent.studentID AND courseStudent.courseID = (?)";
                     ps = con.prepareStatement(sql);
                     ps.setLong(1, courseID);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
-                        list.add(new DatabaseElement(rs.getLong("id"), rs.getString("name")));
+                        list.add(new DatabaseElement(rs.getLong("id"), rs.getString("firstname"),rs.getString("lastname")));
                     }
                 }
             }

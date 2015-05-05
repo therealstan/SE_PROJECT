@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui"
+
+        >
+
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+</h:head>
+
+<h:body>
+
+    <ui:composition template="templates/default/main.xhtml">
+
+
+        <ui:define name="content">
+
+            <h:form id="impactForm">
+
+
+               <!-- <o:inputText id="templateName"
+                             style="background: lightyellow; border: 2px solid green; width: 10rem; color: brown; font-weight: bold;"
+                             promptText="Template Name"
+                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                             focusedStyle="border: 1px solid green;"
+                             value="#{tutor.templateName}" />
+-->
+
+
+
+
+
+
+            <b:panel title="Create Template">
+                <b:panel title="Template Name">
+                    <b:row>
+                        <b:column span="3"><b:inputText id="templateName" placeholder="Template Name..." value="#{tutor.templateName}"/> </b:column>
+                    </b:row>
+                </b:panel>
+
+                <b:panel title="R2S Impacts">
+                    <b:row>
+                        <b:column span="3"><b:inputText id="impact" value="#{tutor.impactName}" placeholder="Impact Name"/></b:column>
+                        <b:column span="3">  <b:inputText id="impactValue" value="#{tutor.impact}"  placeholder="Input rate"/></b:column>
+                        <b:column span="2"> <o:commandLink value="Add Impact" execute="impact impValue" action="#{tutor.addItem}" render="panel" /></b:column>
+                    </b:row>
+
+                     <b:panel id="panel" >
+                    <table class="table">
+                        <tr><th>Impact Name</th><th>Value</th><th>Actions</th></tr>
+
+                        <ui:repeat value="#{tutor.impactList}" var="list">
+                            <tr>
+                                <td>#{list.impactName}</td>
+                                <td>#{list.impact}</td>
+                                <td>
+                                    <b:dropButton value="Action">
+                                        <b:commandButton value="delete" action="#{tutor.deleteItem(list)}" />
+                                        <b:commandButton value="change"/>
+                                    </b:dropButton>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                     </b:panel>
+
+                </b:panel>
+
+                <b:panel title="Profile">
+
+                    <b:row>
+                        <b:column span="3">
+                            <b:selectOneMenu value="#{tutor.selectedS2G}">
+                                <f:selectItems value="#{tutor.getS2GStringList(user.dbCon)}" />
+                            </b:selectOneMenu>
+
+                          <!--  <o:dropDownField id="s2gDropdown" style="background: yellow; border 2px solid cornflowerblue; "
+                                                             promptText="Chose S2G Scheme" value="#{tutor.selectedS2G}">
+
+                            <o:dropDownItems value="#{tutor.getS2GStringList(user.dbCon)}"/>
+                        </o:dropDownField>-->
+                        </b:column>
+                        <b:column span="3">
+                            <b:commandButton value="Submit" action="#{tutor.setValues(user)}"/>
+                        </b:column>
+                    </b:row>
+                </b:panel>
+
+            </b:panel>
+
+
+<!--
+
+
+                <o:dataTable id="impactTable" value="#{tutor.impactList}" var="i">
+                    <o:column>
+                        <f:facet name="header">
+                            <h:outputText value="Impact Name"/>
+                        </f:facet>
+                        #{i.impactName}
+                    </o:column>
+                    <o:column>
+                        <f:facet name="header">
+                            <h:outputText value="Value"/>
+                        </f:facet>
+                        #{i.impact}
+                    </o:column>
+                    <o:column>
+                        <f:facet name="header">Action</f:facet>
+
+                        <o:commandLink value="Delete"
+                                       action="#{tutor.deleteItem(i)}">
+
+                        </o:commandLink>
+                    </o:column>
+                </o:dataTable>
+-->
+
+
+
+
+
+
+            </h:form>
+
+
+           <!-- <h:form>
+
+                <div class="container">
+                    <div class="row clearfix">
+                        <div class="column half">
+                            <h1>Template Konfigurator</h1>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="column fourth">
+
+
+                        </div>
+                        <div class="column fourth middle">
+
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="column third">
+                            <h3>H2 Konfigurieren</h3>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="column third">
+                            <o:inputText id="h2name"
+                                         style="background: beige; border: 2px solid green; width: 80px; color: brown; font-weight: bold;"
+                                         promptText="Name"
+                                         promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                         focusedStyle="border: 1px solid green;"
+                                         value="#{tutor.h2Name}"/>
+                        </div>
+                        <div class="column two-thirds">
+                            <o:inputTextarea id="h2threshold"
+                                             style="background: beige; border: 2px solid pink; width: 80px; color: brown; font-weight: bold;"
+                                             promptText="H2 threshold"
+                                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                             focusedStyle="border: 1px solid green;"
+                                             value="#{tutor.h2Threshold}"/>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="column third">
+                            <h3>R2S - Impacts festlegen</h3>
+                        </div>
+                    </div>
+                    &lt;!&ndash; Impact Nummer 1 &ndash;&gt;
+                    <div class="row clearfix">
+                        <div class="column third">
+                            <o:inputTextarea id="impact1Name"
+                                             style="background: white; border: 2px solid blue; width: 100px; color: brown; font-weight: bold;"
+                                             promptText="Impact1 Name"
+                                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                             focusedStyle="border: 1px solid green;"
+                                             value="#{tutor.impact1Name}"/>
+                        </div>
+                        <div class="column two-thirds">
+                            <o:inputTextarea id="impact1Value"
+                                             style="background: white; border: 2px solid cornflowerblue; width: 80px; color: brown; font-weight: bold;"
+                                             promptText="Impact1"
+                                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                             focusedStyle="border: 1px solid green;"
+                                             value="#{tutor.impact1}"/>
+                        </div>
+
+                    </div>
+                    &lt;!&ndash; Impact Nummer 2 &ndash;&gt;
+                    <div class="row clearfix">
+                        <div class="column third">
+
+                            <o:inputTextarea id="impact2Name"
+                                             style="background: white; border: 2px solid blue; width: 100px; color: brown; font-weight: bold;"
+                                             promptText="Impact2 Name"
+                                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                             focusedStyle="border: 1px solid green;"
+                                             value="#{tutor.impact2Name}"/>
+
+                        </div>
+                        <div class="column two-thirds">
+
+                            <o:inputTextarea id="impact2Value"
+                                             style="background: white; border: 2px solid cornflowerblue; width: 80px; color: brown; font-weight: bold;"
+                                             promptText="Impact2"
+                                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                             focusedStyle="border: 1px solid green;"
+                                             value="#{tutor.impact2}"/>
+
+                        </div>
+
+                    </div>
+                    &lt;!&ndash; Impact Nummer 3 &ndash;&gt;
+                    <div class="row clearfix">
+                        <div class="column third">
+
+                            <o:inputTextarea id="impact3Name"
+                                             style="background: white; border: 2px solid blue; width: 100px; color: brown; font-weight: bold;"
+                                             promptText="Impact2 Name"
+                                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                             focusedStyle="border: 1px solid green;"
+                                             value="#{tutor.impact3Name}"/>
+
+                        </div>
+                        <div class="column two-thirds">
+
+                            <o:inputTextarea id="impact3Value"
+                                             style="background: white; border: 2px solid cornflowerblue; width: 80px; color: brown; font-weight: bold;"
+                                             promptText="Impact3"
+                                             promptTextStyle="background: none; font-style: italic; font-weight: lighter; color:#7e7e7e;"
+                                             focusedStyle="border: 1px solid green;"
+                                             value="#{tutor.impact3}"/>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="column third">
+                            <h3>Notenkonvertierungsprofile:</h3>
+                        </div>
+
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="column third">
+                            Profil wählen
+                        </div>
+                        <div class="column two-thirds">
+
+
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="column fourth">
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </h:form>-->
+        </ui:define>
+    </ui:composition>
+
+
+</h:body>
+</html>
