@@ -22,20 +22,37 @@
 
 
         <ui:define name="content">
+            <b:panel title="Pending Assignments for course" look="success">
+                <table class="table">
+                    <tr>
+                        <th>Assignment Name</th><th><b:button look="info" value="Add"/></th>
 
-
-
-
-       <ul>
-                <ui:repeat value="#{user.dbCon.getCourseListForFach(user.userID, uniID.uniID,fachID.fachID, 0)}" var="courseList">
-                    <li>
+                    </tr>
+                    <ui:repeat value="#{user.dbCon.getCourseListForFach(user.userID, uniID.uniID,fachID.fachID, 0)}" var="courseList">
+                    <tr><td>
                         <h:link value="#{courseList.name}" outcome="templateList_forCourse.xhtml" >
-
+                            <f:param name="courseID" value="#{courseList.id}"/>
                         </h:link>
-                    </li>
+                    </td>
+                        <td>
+                            <b:dropButton value="Action">
+                                <b:navLink value="Rate" outcome="rate.xhtml"/>
+                                <b:navLink value="Message"/>
+                                <b:navLink value="Information"/>
+                            </b:dropButton>
+                        </td>
+                    </tr>
 
-               </ui:repeat>
-       </ul>
+                    </ui:repeat>
+
+                </table>
+            </b:panel>
+
+
+
+
+
+
                 <!--<table class="table">
                     <tr><th>Student name</th><th>Grade</th><th></th></tr>
 
