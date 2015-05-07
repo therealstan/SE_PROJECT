@@ -49,8 +49,8 @@
                 <b:panel title="R2S Impacts">
                     <b:row>
                         <b:column span="3"><b:inputText id="impact" value="#{tutor.impactName}" placeholder="Impact Name"/></b:column>
-                        <b:column span="3">  <b:inputText id="impactValue" value="#{tutor.impact}"  placeholder="Input rate"/></b:column>
-                        <b:column span="2"> <o:commandLink value="Add Impact" execute="impact impValue" action="#{tutor.addItem}" render="panel" /></b:column>
+                        <b:column span="3"> <b:inputText id="impactValue" value="#{tutor.impact}"  placeholder="Input rate"/></b:column>
+                        <b:column span="2"> <o:commandLink value="Add Impact" execute="impact impactValue" action="#{tutor.addItem}" render="panel" /></b:column>
                     </b:row>
 
                      <b:panel id="panel" >

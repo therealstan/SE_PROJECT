@@ -153,13 +153,15 @@ public class DatabaseCon {
         try {
             if (ds != null) {
                 if (con != null) {
-                    List<DatabaseElement> courseList = getCourseList(userID, universityID,0);
+                    //List<DatabaseElement> courseList = getCourseList(userID, universityID,0);
 
-                    for(DatabaseElement element: courseList)
-                    {
-                        String sql = "SELECT fachrichtung.* FROM fachrichtung INNER JOIN fachrichtungCourse ON fachrichtungCourse.idFachrichtung=fachrichtung.id INNER JOIN course ON fachrichtungCourse.idCourse = course.courseID AND course.courseID = (?)";
+                    //for(DatabaseElement element: courseList)
+                    //{
+                      //  String sql = "SELECT fachrichtung.* FROM fachrichtung INNER JOIN fachrichtungCourse ON fachrichtungCourse.idFachrichtung=fachrichtung.id INNER JOIN course ON fachrichtungCourse.idCourse = course.courseID AND course.courseID = (?)";
+                        String sql = "SELECT fachrichtung.* FROM fachrichtung INNER JOIN userUniversity ON userUniversity.UniversityID = fachrichtung.universityID AND userUniversity.UserID = (?) AND userUniversity.UniversityID=(?)\n";
                         ps = con.prepareStatement(sql);
-                        ps.setLong(1, element.id);
+                        ps.setLong(1, userID);
+                        ps.setLong(2, universityID);
                         ResultSet rs = ps.executeQuery();
                         while (rs.next()) {
                             boolean exists = false;
@@ -174,7 +176,7 @@ public class DatabaseCon {
                                 list.add(new DatabaseElement(rs.getLong("id"),rs.getString("name")));
                             }
                         }
-                    }
+                    //}
                 }
             }
         } catch (Exception e) {
@@ -200,10 +202,12 @@ public class DatabaseCon {
                 if (con != null) {
                     String sql = "SELECT course.* FROM course\n" +
                             "\t INNER JOIN university ON university.id=course.universityID AND university.id = (?)\n" +
+
                             "\t INNER JOIN staff_course_supervision ON staff_course_supervision.courseID=course.courseID AND staff_course_supervision.userID = (?) AND course.finished = 0";
                     ps = con.prepareStatement(sql);
                     ps.setLong(1, universityID);
                     ps.setLong(2, userID);
+
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         list.add(new DatabaseElement(rs.getLong("courseID"),rs.getString("name")));
@@ -223,6 +227,43 @@ public class DatabaseCon {
         }
         return list;
     }
+
+    public List<DatabaseElement> getCourseListForFach(long userID, long universityID, long fachrichtungID, int pendingStat) {
+        List<DatabaseElement> list = new ArrayList<DatabaseElement>();
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "SELECT course.* FROM course\n" +
+                            "\t INNER JOIN university ON university.id=course.universityID AND university.id = (?)\n" +
+                            "\t INNER JOIN fachrichtungCourse ON fachrichtungCourse.idCourse=course.courseID AND fachrichtungCourse.idFachrichtung =(?)\n"+
+                            "\t INNER JOIN staff_course_supervision ON staff_course_supervision.courseID=course.courseID AND staff_course_supervision.userID = (?) AND course.finished = 0";
+                    ps = con.prepareStatement(sql);
+                    ps.setLong(1, universityID);
+
+                    ps.setLong(2,fachrichtungID);
+                    ps.setLong(3, userID);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        list.add(new DatabaseElement(rs.getLong("courseID"),rs.getString("name")));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+
 
     public List<DatabaseElement> getTemplateList(long courseID, int pendingStat) {
         List<DatabaseElement> list = new ArrayList<DatabaseElement>();

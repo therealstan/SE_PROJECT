@@ -11,19 +11,23 @@
                     <li class="has-sub #{status.last?'first':'active'}" ><h:link value="#{test.name}" />
                         <ul>
                         <ui:repeat value="#{user.dbCon.getFachrichtungList(user.userID, test.id)}" var="fachrichtung" varStatus="status2">
-                            <li class="has-sub #{status2.last?'first':'active'} "> <h:link value="#{fachrichtung.name}" />
-                                <ul >
+                            <li>
+                                <h:link value="#{fachrichtung.name}" outcome="assignmentList.xhtml">
+                                    <f:param name="fachID" value="#{fachrichtung.id}"/>
+                                    <f:param name="uniID" value="#{test.id}"/>
+                                </h:link>
+
+                                <!--<ul >
                                     <ui:repeat value="#{user.dbCon.getCourseList(user.userID, test.id, 0)}" var="courseList">
                                         <li>
                                             <h:link value="#{courseList.name}" outcome="templateList_forCourse.xhtml" >
-                                                <f:param name="courseID" value="#{courseList.id}"/>
-                                                <f:param name="courseName" value="#{courseList.name}"/>
+
                                             </h:link>
                                         </li>
 
                                     </ui:repeat>
 
-                                </ul>
+                                </ul>-->
                             </li>
                         </ui:repeat>
                         </ul>
