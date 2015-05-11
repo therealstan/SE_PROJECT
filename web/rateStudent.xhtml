@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:o="http://openfaces.org/">
+
+
+
+<ui:composition template="templates/default/main.xhtml">
+
+    <ui:define name="content">
+        <b:panel heading="Bewerten des Studenten GETNAME">
+
+            <!-- Löst eine Bewertung aus. Kalkuliert eine Note. Button ändert den Status (irgendwas bool). danach Submit.
+
+             Submit button schreibt in DB.
+             -->
+            <b:button value="Bewerten"/>
+
+
+            <!-- Wert 1 oder 2 wählen  -->
+
+            <b:panel heading="Hollistische Bewertung">
+               <!-- <o:selectOneRadio value="#{accessor.h2Boolean}">
+                    <f:selectItem styleClass="glyphicon-ok" value="true" itemLabel="Option 1"/>
+                    <f:selectItem value="false" itemLabel="Option 3"/>
+                </o:selectOneRadio>-->
+            </b:panel>
+
+            <!-- Holt die namen der Impacts und settet aus den Inputfields die Werte für rates -->
+            <b:panel heading="Rates eintragen">
+
+            </b:panel>
+
+            <!-- Berechnet zwischennote und zeigt sie an -->
+
+        </b:panel>
+    </ui:define>
+
+</ui:composition>
+
+
+
+
+</html>

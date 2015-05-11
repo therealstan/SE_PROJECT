@@ -260,13 +260,6 @@ public class AccessorBean {
         List<String> names = r2s.getName();
         List<Double> impacts = r2s.getImpacts();
 
-        name1 = names.get(0);
-        name2 = names.get(1);
-        name3 = names.get(2);
-
-        impact1 = impacts.get(0).toString();
-        impact2 = impacts.get(1).toString();
-        impact3 = impacts.get(2).toString();
     }
 
     private long getStudentID(DatabaseCon dbCon) {

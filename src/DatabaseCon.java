@@ -65,6 +65,35 @@ public class DatabaseCon {
     }
 
     /*
+    Get the name of fachrichtung from its ID
+
+
+     */
+
+    public String getFachrichtungName(int fachID)
+    {
+        String FachrichtungName = null;
+        PreparedStatement ps;
+        try {
+            if (con != null) {
+                String sql = "SELECT name from fachrichtung where fachrichtung.id = (?)";
+                ps = con.prepareStatement(sql);
+                ps.setLong(1, fachID);
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    FachrichtungName = rs.getString(1);
+                }
+            }
+        } catch (SQLException sqle) {
+            System.out.println("Kann mich nicht verbinden");
+            sqle.printStackTrace();
+        }
+        return FachrichtungName;
+    }
+
+
+    /*
     returns the number of pending courses
      */
     public double getPendingTemplates(long courseID, int pendingStat)

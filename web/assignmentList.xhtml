@@ -21,8 +21,11 @@
     <ui:composition template="templates/default/main.xhtml">
 
 
+
         <ui:define name="content">
-            <b:panel title="Pending Assignments for course" look="success">
+            <div>
+            <h:form id="assignForm">
+            <b:panel title="Pending Assignments for course #{user.dbCon.getFachrichtungName(fachID.fachID)}" look="success">
                 <table class="table">
                     <tr>
                         <th>Assignment Name</th><th><b:button look="info" value="Add"/></th>
@@ -37,8 +40,13 @@
                         <td>
                             <b:dropButton value="Action">
                                 <b:navLink value="Rate" outcome="rate.xhtml"/>
-                                <b:navLink value="Message"/>
-                                <b:navLink value="Information"/>
+                                <b:navLink value="Change Template"/>
+
+                                <li>
+                                    <input style="margin-left:10%;" class="btn" role="menuitem" type="button" value="Info"  onclick="O$('assignForm:informationForAssignment').showCentered()"/>
+                                </li>
+
+
                             </b:dropButton>
                         </td>
                     </tr>
@@ -47,29 +55,35 @@
 
                 </table>
             </b:panel>
+                <o:popupLayer id="informationForAssignment"
+                              modal="true"
+                              modalLayerStyle="background-color:silver"
+                        styleClass="panel panel-primary">
+
+                    <div class="panel-heading clearfix">
+
+
+                        <h3 class="panel-title pull-left" style="padding-top=7.5px; ">
+                            Information
+                        </h3>
+                        <input class="btn pull-right" type="button" value="x"
+
+                               onclick="O$('assignForm:informationForAssignment').hide();"/>
+
+                    </div>
+
+                        <div class="panel-body">
+                            Hier steht die Information zum Kurs
+                        </div>
+                </o:popupLayer>
+
+            </h:form>
+            </div>
 
 
 
 
 
-
-                <!--<table class="table">
-                    <tr><th>Student name</th><th>Grade</th><th></th></tr>
-
-                    <ui:repeat value="#{user.dbCon.getAssigendStudentList(course.courseID)}" var="stud">
-                        <tr>
-                            <td>#{stud.firstname} #{stud.lastname}</td>
-                            <td>noch nicht bewertet</td>
-                            <td>
-                                <b:dropButton value="Action">
-                                    <b:navLink value="Rate" outcome="rate.xhtml"/>
-                                    <b:navLink value="Message"/>
-                                    <b:navLink value="Information"/>
-                                </b:dropButton>
-                            </td>
-                        </tr>
-                    </ui:repeat>
-                </table>-->
 
 
 

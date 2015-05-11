@@ -48,10 +48,7 @@ public class TutorBean implements Serializable {
     double impact;
 
     private static final ArrayList<Impact> impactList =
-            new ArrayList<>(Arrays.asList(
-                    new Impact("Item1", 0.54),
-                    new Impact("Item2", 0.57)
-            ));
+            new ArrayList<>();
 
     public ArrayList<Impact> getImpactList() {
 
