@@ -12,15 +12,13 @@ import java.util.List;
  */
 public class R2S implements Serializable {
 
-    private List<Double> impacts;
-    private List<Double> rate;
+    //list of impacts
+    List<Impact> impactList;
 
-    private List<String> name;
+    public List<Impact> getImpactList() { return impactList; }
 
     public R2S() {
-        this.impacts = new ArrayList<Double>();
-        this.rate = new ArrayList<Double>();
-        this.name = new ArrayList<String>();
+        this.impactList = new ArrayList<Impact>();
     }
 
     public static long getID(DatabaseCon dbCon, long templateID) {
@@ -49,42 +47,46 @@ public class R2S implements Serializable {
         return id;
     }
 
+    /*
+        add new Impact
+        For new impact only name and impact is required
+     */
     public void addImpact(String name, double impact) {
         if (impact >= 0 && impact <= 1) {
-            this.impacts.add(impact);
-            this.name.add(name);
+            this.impactList.add(new Impact(name,impact));
         }
     }
 
-    public List<Double> getImpacts() {
-        return impacts;
-    }
+    /*
+        add rate to impact
+     */
+    public void addRate(Impact impact, double rate){
 
-    public List<String> getName() {
-        return name;
-    }
-
-    public void addRate(double rate, int index){
-        if(impacts.get(index)!= Double.NaN) {
-            this.rate.add(rate);
+        for(Impact element : impactList)
+        {
+            if(element == impact)
+            {
+                element.rate = rate;
+                return;
+            }
         }
-        else {
-            throw new IllegalArgumentException("This rate has no impact");
-        }
+        throw new IllegalArgumentException("Impact not found");
     }
 
+    /*
+      calculate the score
+     */
     public double getScore(boolean b, H2 h2) throws Exception {
         double score = 0;
-        if(!rate.isEmpty()){
+        if(!impactList.isEmpty()){
             score = h2.boolToScore(b);
 
-            int i = 0;
-            for (Double d : rate) {
-                if (impacts.get(i) != Double.NaN && i < impacts.size())
+            for(Impact element : impactList)
+            {
+                if(element.impact != Double.NaN)
                 {
-                    score = (1-Math.pow((impacts.get(i)*(1-score)),d))/(1-impacts.get(i)*(1-score))*score;
+                    score = (1-Math.pow((element.impact*(1-score)),element.rate))/(1-element.impact*(1-score))*score;
                 }
-                i++;
             }
         }
         return score;
