@@ -34,7 +34,7 @@
         <navigation-case>
             <from-action>#{user.login}</from-action>
             <from-outcome>accessor</from-outcome>
-            <to-view-id>/secured/accessor.xhtml</to-view-id>
+            <to-view-id>/accessor.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-action>#{user.login}</from-action>
@@ -70,7 +70,7 @@
 
     <navigation-rule>
     <description>erfolgreich bewertet</description>
-    <from-view-id>/secured/accessor.xhtml</from-view-id>
+    <from-view-id>/accessor.xhtml</from-view-id>
     <navigation-case>
         <from-action>#{accessor.submitGrade(user)}</from-action>
         <from-outcome>success</from-outcome>

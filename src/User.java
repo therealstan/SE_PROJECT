@@ -11,6 +11,7 @@ import java.security.spec.InvalidKeySpecException;
 @SessionScoped
 public class User {
 
+
     boolean isLoginPage = (FacesContext.getCurrentInstance().getViewRoot()
             .getViewId().lastIndexOf("login_landing.xhtml") > -1);
     private String name;

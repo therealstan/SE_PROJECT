@@ -1,0 +1,39 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:o="http://openfaces.org/"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui"
+
+        >
+
+
+<ui:composition template="templates/default/main.xhtml">
+
+    <ui:define name="content">
+        CREATE ASSIGNMENT AREA
+        <b:panel title="New Assignment">
+            <h:form>
+                <h:panelGrid columns="4" cellpadding="5">
+                    <b:selectOneMenu value="#{assign.selectedUni}" label="Select University" id="uniID">
+                        <f:selectItems value="#{user.dbCon.getUniversityList(user.userID)}" var="uni" itemValue="#{uni.id}" itemLabel="#{uni.name}"/>
+                        <f:ajax listener="#{assign.changeUniversity}" render="fachID"/>
+                    </b:selectOneMenu>
+                    <h:message for="uniID"/>
+                    <b:inputText value="" disabled="true" label="last submitted value:"/>
+                    <b:selectOneMenu value="#{assign.selectedFach}" label="Select course" id="fachID">
+                       <f:selectItems value="#{assign.availableFach}" var="fach" itemValue="#{fach.id}" itemLabel="#{fach.name}"/>
+                    </b:selectOneMenu>
+                    <h:message  for="fachID" />
+                    <b:inputText value="" disabled="true" label="last submitted value:"/>
+                </h:panelGrid>
+            </h:form>
+
+        </b:panel>
+    </ui:define>
+
+</ui:composition>
+
+</html>
