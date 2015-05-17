@@ -33,7 +33,7 @@
             </WatchedTargetModelImpl>
           </list>
         </option>
-        <option name="transportHostId" value="5dd0f43f-12f7-4859-bfed-a16c7cb346a0" />
+        <option name="transportHostId" />
       </data>
     </server-settings>
     <predefined_log_file id="Jetty" enabled="true" />

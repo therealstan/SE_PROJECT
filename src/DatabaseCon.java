@@ -455,6 +455,31 @@ public class DatabaseCon {
         return id;
     }
 
+    public void finishTemplate(long templateID)
+    {
+        PreparedStatement ps = null;
+        try {
+            if (ds != null) {
+                if (con != null) {
+                    String sql = "update template set finished = 1 where id = (?)";
+                    ps = con.prepareStatement(sql);
+                    ps.setLong(1, templateID);
+                    ps.executeUpdate();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public long serializeObject(Object object) {
         int id = -1;
 

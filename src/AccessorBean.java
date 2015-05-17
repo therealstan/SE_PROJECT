@@ -163,6 +163,7 @@ public class AccessorBean {
     public String submitGrade(DatabaseCon dbCon, long studentID) {
         if (grade != null) {
             dbCon.setGrade(courseID, studentID, Double.parseDouble(grade));
+            dbCon.finishTemplate(templateID);
             return "success";
         } else
             return "error";
