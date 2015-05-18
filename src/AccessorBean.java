@@ -40,8 +40,7 @@ public class AccessorBean {
         this.newRate = newRate;
     }
 
-     private float newRate;
-
+    private float newRate;
 
     H2 h2;
     S2G s2g;
@@ -52,7 +51,6 @@ public class AccessorBean {
     private String grade;
 
     public AccessorBean() {
-
     }
 
     public String getGrade() {
@@ -135,10 +133,13 @@ public class AccessorBean {
         initialize class
         get template and saved objects (R2S, S2G, H2)
      */
+    boolean loaded = false;
     public void onPageLoaded(DatabaseCon dbCon, long courseID) {
-
-        templateID =  getTemplateID(dbCon, courseID);
-        getObjects(dbCon, templateID);
+        if(loaded == false){
+            templateID =  getTemplateID(dbCon, courseID);
+            getObjects(dbCon, templateID);
+            loaded = true;
+        }
     }
 
     public UIOutput getGradeOutputText() {
@@ -152,11 +153,9 @@ public class AccessorBean {
     /*
         adds/ sets the rate to the given impact
      */
-    R2S tmpr2s;
     public void setRate(Impact impact, double rate)
     {
         r2s.addRate(impact, rate);
-        tmpr2s=r2s;
     }
 
     /*
@@ -165,9 +164,8 @@ public class AccessorBean {
     public void calcGrade() {
         double score = 0;
         try {
-            score = tmpr2s.getScore(h2Boolean, h2);
-            score=0.8;
-        } catch (Exception e) {
+            score = r2s.getScore(h2Boolean, h2);
+            } catch (Exception e) {
             e.printStackTrace();
         }
         grade = String.valueOf(s2g.getGrade(score));
@@ -185,4 +183,6 @@ public class AccessorBean {
         } else
             return "error";
     }
+
+    /*test*/
 }
