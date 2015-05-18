@@ -9,14 +9,14 @@
 
         >
 <f:metadata>
-    <f:event type="preRenderView" listener="#{accessor.onPageLoaded(user.dbCon, course.courseID)}"/>
+    <f:event type="preRenderView" listener="#{accessor.onPageLoaded(user.dbCon, course.courseID, studID.studID)}"/>
 </f:metadata>
 
 
 <ui:composition template="templates/default/main.xhtml">
 
     <ui:define name="content">
-        <b:panel id="mainPanel" title="Bewerten des Studenten GETNAME #{studID.studID}">
+        <b:panel id="mainPanel" title="Bewerten des Studenten #{user.dbCon.getFullName(studID.studID)}">
 
             <!-- Löst eine Bewertung aus. Kalkuliert eine Note. Button ändert den Status (irgendwas bool). danach Submit.
 
@@ -72,7 +72,7 @@
                                 <h:outputText id="note" value="Note: #{accessor.grade}"/>
                             </b:column>
                             <b:column span="2">
-                                <b:commandButton value="submit grade" look="success" action="#{accessor.submitGrade(user.dbCon,studID.studID)}">
+                                <b:commandButton value="submit grade" look="success" action="#{accessor.submitGrade(user.dbCon)}">
                                     <f:param name="courseID" value="#{course.courseID}"/>
                                     <f:param name="studID" value="#{studID.studID}"/>
                                 </b:commandButton>

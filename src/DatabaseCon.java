@@ -756,6 +756,30 @@ public class DatabaseCon {
         return userName;
     }
 
+    public String getFullName(long userID) {
+        String userName = null;
+
+        if (userID != 0) {
+            PreparedStatement ps;
+            if (ds != null) {
+                try {
+                    if (con != null) {
+                        String sql = "select firstname, lastname from user where id = '"
+                                + userID + "'";
+                        ps = con.prepareStatement(sql);
+                        ResultSet rs = ps.executeQuery();
+                        rs.next();
+                        userName = rs.getString("firstname")+ " " + rs.getString("lastname");
+                    }
+                } catch (SQLException sqle) {
+                    System.out.println("Kann mich nicht verbinden");
+                    sqle.printStackTrace();
+                }
+            }
+        }
+        return userName;
+    }
+
     public String getPasswordHash(long userID) {
         String passwordHash = null;
 

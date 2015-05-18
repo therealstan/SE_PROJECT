@@ -26,5 +26,5 @@ public class studID {
     }
 
     @ManagedProperty("#{param.studID}")
-    public long studID;
+    long studID;
 }

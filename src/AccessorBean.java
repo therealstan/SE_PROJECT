@@ -31,6 +31,7 @@ import java.util.List;
 public class AccessorBean {
 
     long courseID;
+    long studentID;
     long templateID;
 
     public float getNewRate() {
@@ -136,9 +137,10 @@ public class AccessorBean {
         get template and saved objects (R2S, S2G, H2)
      */
     boolean loaded = false;
-    public void onPageLoaded(DatabaseCon dbCon, long courseID) {
+    public void onPageLoaded(DatabaseCon dbCon, long courseID, long studentID) {
         if(loaded == false){
             templateID =  getTemplateID(dbCon, courseID);
+            this.studentID = studentID;
             this.courseID = courseID;
             getObjects(dbCon, templateID);
             loaded = true;
@@ -178,7 +180,7 @@ public class AccessorBean {
     /*
         submit and write grade to DB
      */
-    public String submitGrade(DatabaseCon dbCon, long studentID) {
+    public String submitGrade(DatabaseCon dbCon) {
         if (grade != null) {
             dbCon.setGrade(courseID, studentID, Double.parseDouble(grade));
             dbCon.finishTemplate(templateID);
