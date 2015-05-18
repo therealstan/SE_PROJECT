@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * Created by Dom on 14.05.2015.
  */
@@ -9,7 +11,7 @@
     Impact
     Rate
  */
-public class Impact{
+public class Impact implements Serializable{
 
     public String getImpactName() {
         return impactName;

@@ -28,7 +28,11 @@
             <b:panel title="Pending Assignments for course #{user.dbCon.getFachrichtungName(fachID.fachID)}" look="success">
                 <table class="table">
                     <tr>
-                        <th>Assignment Name</th><th><b:button look="info" value="Add" outcome="newAssignment.xhtml"/></th>
+                        <th>Assignment Name</th><th><b:button look="info" value="Add" outcome="newAssignment.xhtml">
+                        <f:param name="fachID" value="#{fachID.fachID}"/>
+                        <f:param name="uniID" value="#{uniID.uniID}"/>
+                    </b:button>
+                    </th>
 
                     </tr>
                     <ui:repeat value="#{user.dbCon.getCourseListForFach(user.userID, uniID.uniID,fachID.fachID, 0)}" var="courseList">

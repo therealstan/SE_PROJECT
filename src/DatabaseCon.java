@@ -71,6 +71,28 @@ public class DatabaseCon {
 
      */
 
+    public String getUniversityName(int uniId)
+    {
+        String universityName = null;
+        PreparedStatement ps;
+        try {
+            if (con != null) {
+                String sql = "SELECT name from university where university.id = (?)";
+                ps = con.prepareStatement(sql);
+                ps.setLong(1, uniId);
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    universityName = rs.getString(1);
+                }
+            }
+        } catch (SQLException sqle) {
+            System.out.println("Kann mich nicht verbinden");
+            sqle.printStackTrace();
+        }
+        return universityName;
+    }
+
     public String getFachrichtungName(int fachID)
     {
         String FachrichtungName = null;

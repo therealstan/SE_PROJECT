@@ -36,7 +36,9 @@
                             <td>noch nicht bewertet</td>
                             <td>
                                 <b:dropButton value="Action">
-                                    <b:navLink value="Rate" outcome="rateStudent.xhtml"/>
+                                    <b:navLink value="Rate" outcome="rateStudent.xhtml">
+                                        <f:param name="courseID" value="#{course.courseID}"/>
+                                    </b:navLink>
                                     <b:navLink value="Message"/>
                                     <b:navLink value="Information"/>
                                 </b:dropButton>

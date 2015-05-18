@@ -62,11 +62,11 @@ public class R2S implements Serializable {
      */
     public void addRate(Impact impact, double rate){
 
-        for(Impact element : impactList)
+        for(int i = 0; i < impactList.size(); i++)
         {
-            if(element == impact)
+            if(impactList.get(i) == impact)
             {
-                element.rate = rate;
+                impactList.get(i).rate = rate;
                 return;
             }
         }

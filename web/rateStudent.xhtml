@@ -5,14 +5,18 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:o="http://openfaces.org/">
+      xmlns:o="http://openfaces.org/"
 
+        >
+<f:metadata>
+    <f:event type="preRenderView" listener="#{accessor.onPageLoaded(user.dbCon, course.courseID)}"/>
+</f:metadata>
 
 
 <ui:composition template="templates/default/main.xhtml">
 
     <ui:define name="content">
-        <b:panel heading="Bewerten des Studenten GETNAME">
+        <b:panel id="mainPanel" heading="Bewerten des Studenten GETNAME">
 
             <!-- Löst eine Bewertung aus. Kalkuliert eine Note. Button ändert den Status (irgendwas bool). danach Submit.
 
@@ -24,21 +28,69 @@
             <!-- Wert 1 oder 2 wählen  -->
 
             <b:panel heading="Hollistische Bewertung">
-               <!-- <o:selectOneRadio value="#{accessor.h2Boolean}">
-                    <f:selectItem styleClass="glyphicon-ok" value="true" itemLabel="Option 1"/>
-                    <f:selectItem value="false" itemLabel="Option 3"/>
-                </o:selectOneRadio>-->
+               <h:selectOneRadio value="#{accessor.h2Boolean}">
+                    <f:selectItem itemValue="#{true}" itemLabel="=)"/>
+                    <f:selectItem itemValue="#{false}" itemLabel="=("/>
+                    <f:ajax event="change" listener="#{accessor.h2Boolean}" execute="@this"/>
+                </h:selectOneRadio>
             </b:panel>
 
             <!-- Holt die namen der Impacts und settet aus den Inputfields die Werte für rates -->
             <b:panel heading="Rates eintragen">
-
+                <h:form id="rates">
+                <b:panelGrid colSpans="2,4,2,4">
+                    <ui:repeat value="#{accessor.getImpactList()}" var="impact">
+                        <h:outputLabel value="#{impact.impactName}"/>
+                        <b:inputText value="#{impact.impact}" disabled="true"/>
+                        <h:outputLabel value="RATE"/>
+                        <b:inputText id="rateInput" styleClass="form" value="#{accessor.newRate}">
+                            <f:ajax event="change" listener="#{accessor.setRate(impact,accessor.newRate)}" execute="@this"/>
+                        </b:inputText>
+                    </ui:repeat>
+                </b:panelGrid>
+                   <!-- <b:panel>
+                        <h:commandButton action="#{accessor.calcGrade()}" value="Calc">
+                            <f:ajax execute="rates" render=":rates:note"/>
+                        </h:commandButton>
+                        <h:outputText id="note" value="#{accessor.grade}"/>
+                    </b:panel>-->
+                </h:form>
             </b:panel>
+
+
 
             <!-- Berechnet zwischennote und zeigt sie an -->
 
         </b:panel>
+
+        <h:outputScript target="body">
+                $(document).ready(function() {
+                    console.log("start");
+                    console.log($(".form"));
+                    $( ".form" ).bind('keypress', function(e) {
+
+                        var keyCcode = e.keyCode || e.which;
+
+                        // Enter was pressed
+                        if(keyCcode == 13) {
+                            console.log("enter");
+                            e.target.blur();
+                            e.stopPropagation();
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    });
+                });
+        </h:outputScript>
+
+
     </ui:define>
+    <ui:define name="script">
+
+    </ui:define>
+
+
 
 </ui:composition>
 

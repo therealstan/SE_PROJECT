@@ -1,7 +1,12 @@
 body {
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #eee;
+    /*background-color: #eee;*/
+    background: url('/resources/default/1_0/images/Images_Learning_1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .form-signin {
@@ -37,4 +42,13 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+
+.panel-default {
+    opacity: 0.9;
+    margin-top:30px;
+}
+.form-group.last {
+    margin-bottom:0px;
 }

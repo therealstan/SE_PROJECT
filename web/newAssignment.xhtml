@@ -17,18 +17,22 @@
         <b:panel title="New Assignment">
             <h:form>
                 <h:panelGrid columns="4" cellpadding="5">
-                    <b:selectOneMenu value="#{assign.selectedUni}" label="Select University" id="uniID">
+
+                    <b:inputText id="displayUniID2" value="kkk" disabled="true" label="last submitted value:"/>
+
+               <!--     <b:selectOneMenu value="#{assign.selectedUni}" label="Select University" id="uniID">
                         <f:selectItems value="#{user.dbCon.getUniversityList(user.userID)}" var="uni" itemValue="#{uni.id}" itemLabel="#{uni.name}"/>
-                        <f:ajax listener="#{assign.changeUniversity}" render="fachID"/>
+                        <f:ajax listener="#{assign.changeUniversity}" render="displayUniID"/>
                     </b:selectOneMenu>
-                    <h:message for="uniID"/>
-                    <b:inputText value="" disabled="true" label="last submitted value:"/>
-                    <b:selectOneMenu value="#{assign.selectedFach}" label="Select course" id="fachID">
+                    <h:message for="uniID"/>-->
+                    <!--<b:inputText id="displayUniID" value="#{assign.selectedUni}" disabled="true" label="last submitted value:"/>-->
+                    <!--<b:selectOneMenu value="#{assign.selectedFach}" label="Select course" id="fachID">
                        <f:selectItems value="#{assign.availableFach}" var="fach" itemValue="#{fach.id}" itemLabel="#{fach.name}"/>
                     </b:selectOneMenu>
                     <h:message  for="fachID" />
-                    <b:inputText value="" disabled="true" label="last submitted value:"/>
+-->
                 </h:panelGrid>
+
             </h:form>
 
         </b:panel>

@@ -31,9 +31,20 @@ public class AccessorBean {
 
     long courseID;
     long templateID;
+
+    public float getNewRate() {
+        return newRate;
+    }
+
+    public void setNewRate(float newRate) {
+        this.newRate = newRate;
+    }
+
+     private float newRate;
     H2 h2;
     S2G s2g;
     R2S r2s;
+
     UIOutput gradeOutputText;
     private boolean h2Boolean;
     private String grade;
@@ -55,6 +66,7 @@ public class AccessorBean {
     }
 
     public void setH2Boolean(boolean h2Boolean) {
+
         this.h2Boolean = h2Boolean;
     }
 
@@ -138,9 +150,11 @@ public class AccessorBean {
     /*
         adds/ sets the rate to the given impact
      */
+    R2S tmpr2s;
     public void setRate(Impact impact, double rate)
     {
         r2s.addRate(impact, rate);
+        tmpr2s=r2s;
     }
 
     /*
@@ -149,7 +163,8 @@ public class AccessorBean {
     public void calcGrade() {
         double score = 0;
         try {
-            score = r2s.getScore(h2Boolean, h2);
+            score = tmpr2s.getScore(h2Boolean, h2);
+            score=0.8;
         } catch (Exception e) {
             e.printStackTrace();
         }
