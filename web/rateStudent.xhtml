@@ -55,20 +55,18 @@
                     <b:panel title="Note errechnen">
                         <b:row>
                             <b:column span="2">
-                                <b:commandButton valu="Calculate Grad" action="#{accessor.calcGrade()}">
-                                    <f:ajax execute="@form" render="note"/>
-                               </b:commandButton>
 
-                            </b:column>
-                            <b:column span="4">
-                                <b:row>
-                                    <b:column span="6"><h:outputText value="Note:"/></b:column>
-                                    <b:column span="6"><h:outputText id="note" value="#{accessor.grade}"/></b:column>
-                                </b:row>
+                                <h:commandButton  type="button" value="calc" action="#{accessor.calcGrade}" >
+                                    <f:ajax  render="note"/>
+                                </h:commandButton>
+
+                              <!--  <b:commandButton action="#{accessor.calcGrade()}" value="Calculate">
+                                    <f:ajax execute="rates" render="note"/>
+                                </b:commandButton>-->
+                                <h:outputText id="note" value="Note: #{accessor.grade}"/>
                             </b:column>
                             <b:column span="2">
-                                <b:button value="submit grade" look="success"/>
-
+                                <b:commandButton value="submit grade" look="success" action="#{accessor.submitGrade(user.dbCon,studID.studID)}"/>
                             </b:column>
 
                         </b:row>

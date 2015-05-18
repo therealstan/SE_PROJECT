@@ -1,6 +1,7 @@
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIOutput;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -170,7 +171,7 @@ public class AccessorBean {
         }
         grade = String.valueOf(s2g.getGrade(score));
         gradeOutputText.setValue(grade);
-    }
+         }
 
     /*
         submit and write grade to DB
