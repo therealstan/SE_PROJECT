@@ -3,6 +3,7 @@
     <option name="HOST" value="stas.dann-halt.net" />
     <option name="LOCAL" value="false" />
     <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+    <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
     <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>
       <artifact name="open_test:war exploded">
@@ -19,21 +20,40 @@
               <option name="transportStagingTarget">
                 <TransportTarget>
                   <option name="id" value="c6059008-221f-4107-846a-0a457ea71b7c" />
+                  <id>c6059008-221f-4107-846a-0a457ea71b7c</id>
                 </TransportTarget>
               </option>
+              <staging-path>$PROJECT_DIR$/../../../jettyftp/staging</staging-path>
+              <name>STAGING</name>
+              <transport-target>
+                <TransportTarget>
+                  <option name="id" value="c6059008-221f-4107-846a-0a457ea71b7c" />
+                  <id>c6059008-221f-4107-846a-0a457ea71b7c</id>
+                </TransportTarget>
+              </transport-target>
             </StagingTargetModelImpl>
             <WatchedTargetModelImpl>
               <option name="name" value="CONTEXT" />
               <option name="transportStagingTarget">
                 <TransportTarget>
                   <option name="id" value="79d69d1b-5a80-4cfc-8bba-526c32ac9b85" />
+                  <id>79d69d1b-5a80-4cfc-8bba-526c32ac9b85</id>
                 </TransportTarget>
               </option>
               <option name="watchedLocalPath" value="" />
+              <watched-path />
+              <name>CONTEXT</name>
+              <transport-target>
+                <TransportTarget>
+                  <option name="id" value="79d69d1b-5a80-4cfc-8bba-526c32ac9b85" />
+                  <id>79d69d1b-5a80-4cfc-8bba-526c32ac9b85</id>
+                </TransportTarget>
+              </transport-target>
             </WatchedTargetModelImpl>
           </list>
         </option>
-        <option name="transportHostId" />
+        <option name="transportHostId" value="5dd0f43f-12f7-4859-bfed-a16c7cb346a0" />
+        <host-id>5dd0f43f-12f7-4859-bfed-a16c7cb346a0</host-id>
       </data>
     </server-settings>
     <predefined_log_file id="Jetty" enabled="true" />

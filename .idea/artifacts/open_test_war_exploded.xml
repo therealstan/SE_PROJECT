@@ -11,8 +11,12 @@
           <element id="library" level="project" name="OpenFaces-3.0" />
           <element id="library" level="project" name="Mojarra-2.2.1" />
           <element id="file-copy" path="$USER_HOME$/Downloads/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar" />
-          <element id="file-copy" path="C:/Program Files (x86)/MySQL/MySQL Connector J/mysql-connector-java-5.1.34-bin.jar" />
-          <element id="file-copy" path="D:/Downloads/BootsFaces-OSP-dist-0.6.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/openfaces.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/richfaces-components-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/richfaces-components-ui.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/richfaces-core-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/richfaces-core-impl.jar" />
+          <element id="library" level="project" name="BootsFaces-OSP-dist-0.6.6" />
         </element>
       </element>
     </root>

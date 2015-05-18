@@ -38,22 +38,42 @@
             <!-- Holt die namen der Impacts und settet aus den Inputfields die Werte für rates -->
             <b:panel title="Rates eintragen">
                 <h:form id="rates">
-                <b:panelGrid colSpans="2,4,2,4">
+                <b:panel>
                     <ui:repeat value="#{accessor.getImpactList()}" var="impact">
-                        <h:outputLabel value="#{impact.impactName}"/>
-                        <b:inputText value="#{impact.impact}" disabled="true"/>
-                        <h:outputLabel value="RATE"/>
-                        <b:inputText id="rateInput" styleClass="form" value="#{accessor.newRate}">
-                            <f:ajax event="change" listener="#{accessor.setRate(impact,accessor.newRate)}" execute="@this"/>
-                        </b:inputText>
+                        <b:row>
+                            <b:column  span="2"><h:outputLabel value="#{impact.impactName}"/></b:column>
+                            <b:column  span="3"><b:inputText value="#{impact.impact}" disabled="true"/></b:column>
+                            <b:column  span="2"> <h:outputLabel value="RATE"/></b:column>
+                            <b:column  span="4">
+                                <b:inputText id="rateInput" styleClass="form" value="#{accessor.newRate}">
+                                <f:ajax event="change" listener="#{accessor.setRate(impact,accessor.newRate)}" execute="@this"/>
+                            </b:inputText>
+                            </b:column>
+                        </b:row>
                     </ui:repeat>
-                </b:panelGrid>
-                   <!-- <b:panel>
-                        <h:commandButton action="#{accessor.calcGrade()}" value="Calc">
-                            <f:ajax execute="rates" render=":rates:note"/>
-                        </h:commandButton>
-                        <h:outputText id="note" value="#{accessor.grade}"/>
-                    </b:panel>-->
+                </b:panel>
+                    <b:panel title="Note errechnen">
+                        <b:row>
+                            <b:column span="2">
+                                <b:commandButton valu="Calculate Grad" action="#{accessor.calcGrade()}">
+                                    <f:ajax execute="@form" render="note"/>
+                               </b:commandButton>
+
+                            </b:column>
+                            <b:column span="4">
+                                <b:row>
+                                    <b:column span="6"><h:outputText value="Note:"/></b:column>
+                                    <b:column span="6"><h:outputText id="note" value="#{accessor.grade}"/></b:column>
+                                </b:row>
+                            </b:column>
+                            <b:column span="2">
+                                <b:button value="submit grade" look="success"/>
+
+                            </b:column>
+
+                        </b:row>
+
+                    </b:panel>
                 </h:form>
             </b:panel>
 

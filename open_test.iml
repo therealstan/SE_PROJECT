@@ -20,12 +20,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Mojarra-2.2.1" level="project" />
-    <orderEntry type="library" name="OpenFaces-3.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Jetty 9.2.3.v201409051" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Jetty 9.2.10.v20150310" level="application_server_libraries" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://C:/Program Files (x86)/MySQL/MySQL Connector J/mysql-connector-java-5.1.34-bin.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -34,11 +33,30 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Downloads/BootsFaces-OSP-dist-0.6.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/openfaces.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/richfaces-components-api.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/richfaces-components-ui.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/richfaces-core-api.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/richfaces-core-impl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/richfaces-components-api-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/richfaces-components-ui-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/richfaces-core-api-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/richfaces-core-impl-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="org.richfaces.ui:richfaces-ui:3.3.3.Final" level="project" />
+    <orderEntry type="library" name="BootsFaces-OSP-dist-0.6.6" level="project" />
   </component>
 </module>

@@ -13,29 +13,47 @@
 <ui:composition template="templates/default/main.xhtml">
 
     <ui:define name="content">
-        CREATE ASSIGNMENT AREA
-        <b:panel title="New Assignment">
+
+
             <h:form>
-                <h:panelGrid columns="4" cellpadding="5">
-
-                    <b:inputText id="displayUniID2" value="kkk" disabled="true" label="last submitted value:"/>
-
-               <!--     <b:selectOneMenu value="#{assign.selectedUni}" label="Select University" id="uniID">
-                        <f:selectItems value="#{user.dbCon.getUniversityList(user.userID)}" var="uni" itemValue="#{uni.id}" itemLabel="#{uni.name}"/>
-                        <f:ajax listener="#{assign.changeUniversity}" render="displayUniID"/>
+                <b:panel title="New Assignment">
+                    <b:row>
+                        <b:column span="3">
+                    <b:selectOneMenu label="Select a university">
+                        <f:selectItem itemValue="1" itemLabel="DHBW Stuttgart"/>
+                        <f:selectItem itemValue="2" itemLabel="DHBW Ravensburg"/>
                     </b:selectOneMenu>
-                    <h:message for="uniID"/>-->
-                    <!--<b:inputText id="displayUniID" value="#{assign.selectedUni}" disabled="true" label="last submitted value:"/>-->
-                    <!--<b:selectOneMenu value="#{assign.selectedFach}" label="Select course" id="fachID">
-                       <f:selectItems value="#{assign.availableFach}" var="fach" itemValue="#{fach.id}" itemLabel="#{fach.name}"/>
+                        </b:column>
+                        <b:column span="3">
+                    <b:selectOneMenu label="Select a course">
+                        <f:selectItem itemValue="1" itemLabel="TINF13IN"/>
+                        <f:selectItem itemValue="2" itemLabel="TINF12IN"/>
                     </b:selectOneMenu>
-                    <h:message  for="fachID" />
--->
-                </h:panelGrid>
+                        </b:column>
+                        <b:column span="3">
+                    <b:selectOneMenu label="Select a Template">
+                        <f:selectItem itemValue="1" itemLabel="Klausur"/>
+                        <f:selectItem itemValue="2" itemLabel="Essay"/>
+                        <f:selectItem itemValue="3" itemLabel="Report"/>
+                        <f:selectItem itemValue="3" itemLabel="Vortrag"/>
+                    </b:selectOneMenu>
+                        </b:column>
 
+
+                    </b:row>
+
+                    <b:row>
+                        <b:column span="4">
+                            <b:datepicker showButtonPanel="true" mode="popup-icon"/>
+                        </b:column>
+                        <b:column span="4">
+                            <b:commandButton value="Create" look="success"/>
+                        </b:column>
+                    </b:row>
+                </b:panel>
             </h:form>
 
-        </b:panel>
+
     </ui:define>
 
 </ui:composition>
