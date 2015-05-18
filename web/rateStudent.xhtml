@@ -22,12 +22,12 @@
 
              Submit button schreibt in DB.
              -->
-            <b:button value="Bewerten"/>
+
 
 
             <!-- Wert 1 oder 2 wählen  -->
 
-            <b:panel heading="Hollistische Bewertung">
+            <b:panel title="Hollistische Bewertung">
                <h:selectOneRadio value="#{accessor.h2Boolean}">
                     <f:selectItem itemValue="#{true}" itemLabel="=)"/>
                     <f:selectItem itemValue="#{false}" itemLabel="=("/>
@@ -36,7 +36,7 @@
             </b:panel>
 
             <!-- Holt die namen der Impacts und settet aus den Inputfields die Werte für rates -->
-            <b:panel heading="Rates eintragen">
+            <b:panel title="Rates eintragen">
                 <h:form id="rates">
                 <b:panelGrid colSpans="2,4,2,4">
                     <ui:repeat value="#{accessor.getImpactList()}" var="impact">
