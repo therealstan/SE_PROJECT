@@ -41,7 +41,7 @@
                 <li class="has-sub " ><h:link value="#{sem.name}" />
                     <ul>
                         <ui:repeat value="#{user.dbCon.getFach(user.userID, sem.id)}" var="fach" >
-                            <li > <h:link value="#{fach.name}" />
+                            <li > <h:link value="#{fach.name}" outcome="note.xhtml"/>
 
                             </li>
                         </ui:repeat>
