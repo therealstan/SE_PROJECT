@@ -165,8 +165,7 @@ public class AccessorBean {
         double score = 0;
         try {
             score = r2s.getScore(h2Boolean, h2);
-            score=0.8;
-        } catch (Exception e) {
+            } catch (Exception e) {
             e.printStackTrace();
         }
         grade = String.valueOf(s2g.getGrade(score));
@@ -184,4 +183,6 @@ public class AccessorBean {
         } else
             return "error";
     }
+
+    /*test*/
 }
