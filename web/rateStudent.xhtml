@@ -56,13 +56,17 @@
                         <b:row>
                             <b:column span="2">
 
-                                <h:commandButton  type="button" value="calc" action="#{accessor.calcGrade}" >
+                                <h:commandButton styleClass="btn btn-primary"  type="button" value="calc" action="#{accessor.calcGrade}" >
                                     <f:ajax  render="note"/>
                                 </h:commandButton>
 
                               <!--  <b:commandButton action="#{accessor.calcGrade()}" value="Calculate">
                                     <f:ajax execute="rates" render="note"/>
                                 </b:commandButton>-->
+
+                            </b:column>
+
+                            <b:column span="2">
                                 <h:outputText id="note" value="Note: #{accessor.grade}"/>
                             </b:column>
                             <b:column span="2">
