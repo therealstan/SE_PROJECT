@@ -29,7 +29,7 @@ public class Impact implements Serializable{
         this.impact = impact;
     }
 
-    public double getRate() { return rate; }
+    public double getRate() { return this.rate; }
 
     public void setRate(double rate) { this.rate = rate; }
 
@@ -41,5 +41,6 @@ public class Impact implements Serializable{
     public Impact(String impactName, double impact) {
         this.impactName = impactName;
         this.impact = impact;
+        this.rate = 0;
     }
 }

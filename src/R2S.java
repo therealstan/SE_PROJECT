@@ -66,7 +66,7 @@ public class R2S implements Serializable {
         {
             if(impactList.get(i) == impact)
             {
-                impactList.get(i).rate = rate;
+                impactList.get(i).setRate(rate);
                 return;
             }
         }
