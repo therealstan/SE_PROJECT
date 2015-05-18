@@ -16,7 +16,7 @@
 <ui:composition template="templates/default/main.xhtml">
 
     <ui:define name="content">
-        <b:panel id="mainPanel" heading="Bewerten des Studenten GETNAME">
+        <b:panel id="mainPanel" title="Bewerten des Studenten GETNAME #{studID.studID}">
 
             <!-- Löst eine Bewertung aus. Kalkuliert eine Note. Button ändert den Status (irgendwas bool). danach Submit.
 
@@ -58,6 +58,8 @@
 
                                 <h:commandButton styleClass="btn btn-primary"  type="button" value="calc" action="#{accessor.calcGrade}" >
                                     <f:ajax  render="note"/>
+                                    <f:param name="courseID" value="#{course.courseID}"/>
+                                    <f:param name="studID" value="#{studID.studID}"/>
                                 </h:commandButton>
 
                               <!--  <b:commandButton action="#{accessor.calcGrade()}" value="Calculate">
@@ -70,7 +72,10 @@
                                 <h:outputText id="note" value="Note: #{accessor.grade}"/>
                             </b:column>
                             <b:column span="2">
-                                <b:commandButton value="submit grade" look="success" action="#{accessor.submitGrade(user.dbCon,studID.studID)}"/>
+                                <b:commandButton value="submit grade" look="success" action="#{accessor.submitGrade(user.dbCon,studID.studID)}">
+                                    <f:param name="courseID" value="#{course.courseID}"/>
+                                    <f:param name="studID" value="#{studID.studID}"/>
+                                </b:commandButton>
                             </b:column>
 
                         </b:row>
