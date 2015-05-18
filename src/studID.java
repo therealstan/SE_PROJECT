@@ -17,14 +17,14 @@ import javax.faces.context.FacesContext;
 
 public class studID {
 
-    public String getStudID() {
+    public long getStudID() {
         return studID;
     }
 
-    public void setStudID(String studID) {
+    public void setStudID(long studID) {
         this.studID = studID;
     }
 
     @ManagedProperty("#{param.studID}")
-    public String studID;
+    public long studID;
 }
