@@ -52,6 +52,7 @@ public class AccessorBean {
     private String grade;
 
     public AccessorBean() {
+        gradeOutputText = new UIOutput();
     }
 
     public String getGrade() {
@@ -138,6 +139,7 @@ public class AccessorBean {
     public void onPageLoaded(DatabaseCon dbCon, long courseID) {
         if(loaded == false){
             templateID =  getTemplateID(dbCon, courseID);
+            this.courseID = courseID;
             getObjects(dbCon, templateID);
             loaded = true;
         }
@@ -166,12 +168,12 @@ public class AccessorBean {
         double score = 0;
         try {
             score = r2s.getScore(h2Boolean, h2);
-            } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         grade = String.valueOf(s2g.getGrade(score));
         gradeOutputText.setValue(grade);
-         }
+    }
 
     /*
         submit and write grade to DB
